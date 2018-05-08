@@ -1,0 +1,48 @@
+{
+	"name": "Report",
+	"version": "0.0.0",
+	"author": [
+		"Ken Hilton"
+	],
+	"url": "https://github.com/Kenny2github/Report",
+	"descriptionmsg": "report-desc",
+	"license-name": "MIT",
+	"type": "specialpage",
+	"AutoloadClasses": {
+		"ReportHooks": "Report.class.php",
+		"SpecialReport": "SpecialReport.php",
+		"SpecialHandleReports": "SpecialHandleReports.php"
+	},
+	"AvailableRights": [
+		"report",
+		"handle-reports"
+	],
+	"SpecialPages": {
+		"Report": "SpecialReport",
+		"HandleReports": "SpecialHandleReports"
+	},
+	"Hooks": {
+		"LoadExtensionSchemaUpdates": "ReportHooks::onLoadExtensionSchemaUpdates",
+		"HistoryRevisionTools": "ReportHooks::insertReportLink",
+		"DiffRevisionTools": "ReportHooks::insertReportLink",
+		"BeforePageDisplay": "ReportHooks::reportsAwaitingNotice"
+	},
+	"GroupPermissions": {
+		"user": { "report": true },
+		"*": { "report": false, "handle-reports": false },
+		"sysop": { "handle-reports": true }
+	},
+	"ResourceModules": {
+		"ext.report": {
+			"styles": "main.css",
+			"localBasePath": "resources",
+			"remoteExtPath": "Report/resources"
+		}
+	},
+	"MessagesDirs": {
+		"Report": [
+			"i18n"
+		]
+	},
+	"manifest_version": 1
+}
