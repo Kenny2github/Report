@@ -33,7 +33,7 @@
 	"report-reported": "報告されました",
 	"report-already-reported": "この版はすでに報告されています",
 	"report-reports-awaiting": "<b>$2</b>個の$1が確認待ちです。<b>ご注意ください!</b>",
-	"report-reports-awaiting-linktext": "報告",
+	"report-reports-awaiting-linktext": "{{PLURAL:$1|報告|報告}}",
 	"report-has-been-handled": "この報告は確認済みとされました。",
 	"report-submit": "送信"
 }
