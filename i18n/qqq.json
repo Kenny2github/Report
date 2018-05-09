@@ -34,5 +34,6 @@
 	"report-already-reported": "Error text for when a user attempts to re-report a revision",
 	"report-reports-awaiting": "Contents of at the top of Special:RecentChanges and Special:Watchlist notifying admins that there are reports needing handling. $1 is the link to the special page, $2 is the number of reports.",
 	"report-reports-awaiting-linktext": "Link text for the admin's box link leading to Special:HandleReports. $1 is the number of reports.",
-	"report-has-been-handled": "Contents of paragraph stating handling success"
+	"report-has-been-handled": "Contents of paragraph stating handling success",
+	"report-submit": "Button text for submitting a report"
 }

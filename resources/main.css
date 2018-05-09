@@ -1,5 +1,6 @@
-.mw-report-handling-textarea {
-	resize: none;
+textarea {
+	resize: vertical;
+	display: block;
 }
 table {
 	text-align: center;

@@ -10,6 +10,7 @@ class SpecialReport extends SpecialPage {
 		$user = $this->getUser();
 		$out = $this->getOutput();
 		$out->setPageTitle( wfMessage('report-title')->escaped() );
+		$out->addModules( 'ext.report' );
 		if ( !$user->isAllowed( 'report' ) ) {
 			$out->addHTML(Html::rawElement(
 				'p',
@@ -89,7 +90,8 @@ class SpecialReport extends SpecialPage {
 			'input',
 			[
 				'type' => 'submit',
-				'id' => 'mw-report-form-submit'
+				'id' => 'mw-report-form-submit',
+				'value' => wfMessage( 'report-submit' )
 			]
 		));
 		$out->addHTML(Html::closeElement( 'form' ));

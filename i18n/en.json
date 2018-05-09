@@ -34,5 +34,6 @@
 	"report-already-reported": "You have already reported this revision.",
 	"report-reports-awaiting": "<b>$2</b> unhandled $1 {{PLURAL:$2|is|are}} awaiting. <b>Your attention is needed!</b>",
 	"report-reports-awaiting-linktext": "{{PLURAL:$1|report|reports}}",
-	"report-has-been-handled": "The report has been marked as handled."
+	"report-has-been-handled": "The report has been marked as handled.",
+	"report-submit": "Submit report"
 }
