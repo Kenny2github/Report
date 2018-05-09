@@ -6,7 +6,7 @@
 	],
 	"url": "https://github.com/Kenny2github/Report",
 	"descriptionmsg": "report-desc",
-	"license-name": "MIT",
+	"license-name": "GPLv3",
 	"type": "specialpage",
 	"AutoloadClasses": {
 		"ReportHooks": "Report.class.php",
@@ -28,9 +28,16 @@
 		"BeforePageDisplay": "ReportHooks::reportsAwaitingNotice"
 	},
 	"GroupPermissions": {
-		"user": { "report": true },
-		"*": { "report": false, "handle-reports": false },
-		"sysop": { "handle-reports": true }
+		"user": {
+			"report": true
+		},
+		"*": {
+			"report": false,
+			"handle-reports": false
+		},
+		"sysop": {
+			"handle-reports": true
+		}
 	},
 	"ResourceModules": {
 		"ext.report": {
