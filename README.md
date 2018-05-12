@@ -4,7 +4,7 @@ Report is an extension that, very simply, allows reporting revisions, hence the 
 
 ## Installation
 
-Run the following commands:
+From the root directory of your wiki, run the following commands:
 ```
 cd extensions
 git clone https://github.com/Kenny2github/Report.git
@@ -13,6 +13,12 @@ Then add the following line to your LocalSettings.php:
 ```php
 wfLoadExtension( 'Report' );
 ```
+Finally, from the root directory of your wiki, run the following commands:
+```
+cd maintenance
+php update.php
+```
+This will create the necessary tables that the extension needs.
 
 ## Usage
 
