@@ -3,7 +3,7 @@
 		"author": "Ken Hilton"
 	},
 	"report": "Title of Special:Report as appears in Special:SpecialPages",
-	"report-desc": "{{desc|name=Report|url=https://github.com/Kenny2github/Report",
+	"report-desc": "{{desc|name=Report|url=https://www.mediawiki.org/wiki/Extension:Report}}",
 	"report-title": "Title of Special:Report",
 	"report-intro": "Contents of paragraph before report form",
 	"report-error-invalid-revid": "Error for an invalid revision ID",

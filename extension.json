@@ -4,7 +4,7 @@
 	"author": [
 		"Ken Hilton"
 	],
-	"url": "https://github.com/Kenny2github/Report",
+	"url": "https://www.mediawiki.org/wiki/Extension:Report",
 	"descriptionmsg": "report-desc",
 	"license-name": "GPLv3",
 	"type": "specialpage",
