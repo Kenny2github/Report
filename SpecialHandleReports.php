@@ -104,7 +104,8 @@ class SpecialHandleReports extends SpecialPage {
 				'report_user',
 				'report_revid',
 				'report_handled',
-				'report_handled_by'
+				'report_handled_by',
+				'report_handled_timestamp'
 			], [ 'report_id' => (int)$par ],
 			__METHOD__)) {
 				$out->addHTML(Html::openElement('fieldset'));
@@ -196,7 +197,9 @@ class SpecialHandleReports extends SpecialPage {
 					'not') .
 					'handled';
 				$out->addHTML(Html::rawElement('td', [],
-					wfMessage( $msgkey )->escaped()
+					$query->report_handled ?
+					wfMessage( 'report-handling-handled' )->escaped() :
+					wfMessage( 'reprot-handling-nothandled' )->escaped()
 				));
 				// <td>
 				$out->addHTML(Html::openElement('td'));

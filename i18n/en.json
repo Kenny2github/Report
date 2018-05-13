@@ -29,6 +29,8 @@
 	"report-handling-handled-by": "Handled by",
 	"report-handling-view-handled": "View handled reports",
 	"report-handling-view-nothandled": "View unhandled reports",
+	"report-handling-handled": "Handled",
+	"report-handling-nothandled": "Not handled",
 	"report-report": "report",
 	"report-reported": "reported",
 	"report-already-reported": "You have already reported this revision.",

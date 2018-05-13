@@ -29,6 +29,8 @@
 	"report-handling-handled-by": "Table header for username of handler",
 	"report-handling-view-handled": "Link text to view handled reports",
 	"report-handling-view-nothandled": "Link text to view unhandled reports",
+	"report-handling-handled": "Text specifying that the report being viewed is handled",
+	"report-handling-nothandled": "Text specifying that the report being viewed is not handled",
 	"report-report": "Link text for report link in history and diffs",
 	"report-reported": "Span text for a revision that has already been reported by the user",
 	"report-already-reported": "Error text for when a user attempts to re-report a revision",
