@@ -199,7 +199,7 @@ class SpecialHandleReports extends SpecialPage {
 				$out->addHTML(Html::rawElement('td', [],
 					$query->report_handled ?
 					wfMessage( 'report-handling-handled' )->escaped() :
-					wfMessage( 'reprot-handling-nothandled' )->escaped()
+					wfMessage( 'report-handling-nothandled' )->escaped()
 				));
 				// <td>
 				$out->addHTML(Html::openElement('td'));
