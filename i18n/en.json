@@ -37,5 +37,7 @@
 	"report-reports-awaiting": "<b>$2</b> unhandled $1 {{PLURAL:$2|is|are}} awaiting. <b>Your attention is needed!</b>",
 	"report-reports-awaiting-linktext": "{{PLURAL:$1|report|reports}}",
 	"report-has-been-handled": "The report has been marked as handled.",
-	"report-submit": "Submit report"
+	"report-submit": "Submit report",
+	"right-report": "Report revisions for administrator attention",
+	"right-handle-reports": "Handle revision reports"
 }
