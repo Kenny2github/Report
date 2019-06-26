@@ -9,7 +9,7 @@ class ReportHooks {
 	}
 
 	public static function insertReportLink( $rev, &$links, $oldRev, $user ) {
-		if ( $user->isAllowed( 'report' ) && !$user->isBlocked() ) {
+		if ( $user->isAllowed( 'report' ) && !$user->isBlocked() && !$user->isAllowed('handle-reports') ) {
 			$links[] = self::generateReportElement( $rev->getID() );
 		}
 	}
