@@ -84,7 +84,7 @@ class SpecialHandleReports extends SpecialPage {
 					htmlspecialchars($user->getName())
 				)));
 				$out->addHTML(Html::rawElement('td', [], Html::rawElement('a',
-					[ 'href' => $wgScriptPath . '/index.php?oldid=' . $row->report_revid ],
+					[ 'href' => $wgScriptPath . '/index.php?diff=' . $row->report_revid ],
 					htmlspecialchars($row->report_revid)
 				)));
 				$out->addHTML(Html::rawElement('td', [], Html::rawElement('a',
@@ -135,7 +135,7 @@ class SpecialHandleReports extends SpecialPage {
 					wfMessage( 'report-handling-revid' )->escaped()
 				));
 				$out->addHTML(Html::rawElement('td', [], Html::rawElement('a',
-					[ 'href' => $wgScriptPath . '/index.php?oldid=' . $query->report_revid ],
+					[ 'href' => $wgScriptPath . '/index.php?diff=' . $query->report_revid ],
 					htmlspecialchars($query->report_revid)
 				)));
 				$out->addHTML(Html::closeElement('fieldset'));
@@ -207,7 +207,7 @@ class SpecialHandleReports extends SpecialPage {
 					$handledby = User::newFromId($query->report_handled_by);
 					// <a href="...">...</a>
 					$out->addHTML(Html::rawElement('a',
-						[ 'href' => $handledby->getUserPage() ],
+						[ 'href' => $handledby->getUserPage()->getLocalURL() ],
 						$handledby->getName()
 					));
 				} else {
