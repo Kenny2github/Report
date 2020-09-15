@@ -107,7 +107,7 @@ class SpecialReport extends SpecialPage {
 			));
 		} else {
 			$dbw = wfGetDB( DB_MASTER );
-			$dbw->begin();
+			$dbw->startAtomic(__METHOD__);
 			$dbw->insert( 'report_reports', [
 				'report_revid' => (int)$par,
 				'report_reason' => $request->getText('reason'),
@@ -115,7 +115,7 @@ class SpecialReport extends SpecialPage {
 				'report_user_text' => $wgUser->getName(),
 				'report_timestamp' => wfTimestampNow()
 			], __METHOD__ );
-			$dbw->commit();
+			$dbw->endAtomic(__METHOD__);
 			$out->addWikiMsg( 'report-success' );
 			$out->addWikiMsg( 'returnto', '[[' . Revision::newFromId( (int)$par )->getTitle()->getPrefixedText() . ']]' );
 			return;
