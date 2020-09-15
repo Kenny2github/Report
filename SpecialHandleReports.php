@@ -241,14 +241,14 @@ class SpecialHandleReports extends SpecialPage {
 	public function onPost( $par, $out, $user ) {
 		if ($user->matchEditToken($this->getRequest()->getText( 'token' ))) {
 			$dbw = wfGetDB( DB_MASTER );
-			$dbw->begin();
+			$dbw->startAtomic(__METHOD__);
 			$dbw->update( 'report_reports', [
 				'report_handled' => 1,
 				'report_handled_by' => $user->getId(),
 				'report_handled_by_text' => $user->getName(),
 				'report_handled_timestamp' => wfTimestampNow()
 			 ], [ 'report_id' => (int)$par ], __METHOD__ );
-			$dbw->commit();
+			$dbw->endAtomic(__METHOD__);
 			$out->addHTML(Html::rawElement('div', [],
 				wfMessage( 'report-has-been-handled' )->escaped()
 			));
