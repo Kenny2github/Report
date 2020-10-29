@@ -11,6 +11,7 @@ class SpecialReport extends SpecialPage {
 		$out = $this->getOutput();
 		$out->setPageTitle( wfMessage('report-title')->escaped() );
 		$out->addModules( 'ext.report' );
+		$this->checkReadOnly();
 		if ( !$user->isAllowed( 'report' ) ) {
 			$out->addHTML(Html::rawElement(
 				'p',

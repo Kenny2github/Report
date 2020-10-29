@@ -12,6 +12,7 @@ class SpecialHandleReports extends SpecialPage {
 		$out->addModuleStyles( 'ext.report' );
 		$out->setPageTitle( wfMessage('report-handling-title')->escaped() );
 		$out->setIndexPolicy( 'noindex' );
+		$this->checkReadOnly();
 		$user = $this->getUser();
 		if ( !$this->userCanExecute( $user ) ) {
 			$this->displayRestrictionError();
