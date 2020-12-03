@@ -64,7 +64,7 @@ class SpecialHandleReports extends SpecialPage {
 			foreach ($dbr->select( 'report_reports', [
 				'report_id',
 				'report_reason',
-				'report_user',
+				'report_actor',
 				'report_revid',
 				'report_timestamp',
 			], $conds, __METHOD__)
@@ -79,7 +79,7 @@ class SpecialHandleReports extends SpecialPage {
 					'class' => 'mw-report-handling-textarea' ],
 					htmlspecialchars($row->report_reason)
 				)));
-				$user = User::newFromId($row->report_user);
+				$user = User::newFromId($row->report_actor);
 				$out->addHTML(Html::rawElement('td', [], Html::rawElement('a',
 					[ 'href' => $user->getUserPage()->getLocalURL() ],
 					htmlspecialchars($user->getName())
@@ -102,7 +102,7 @@ class SpecialHandleReports extends SpecialPage {
 			$dbr = wfGetDB( DB_REPLICA );
 			if ($query = $dbr->selectRow( 'report_reports', [
 				'report_reason',
-				'report_user',
+				'report_actor',
 				'report_revid',
 				'report_handled',
 				'report_handled_by',
@@ -118,7 +118,7 @@ class SpecialHandleReports extends SpecialPage {
 					[ 'readonly' => '', 'class' => 'mw-report-handling-textarea' ],
 					htmlspecialchars($query->report_reason)
 				));
-				$user = User::newFromId($query->report_user);
+				$user = User::newFromId($query->report_actor);
 				$out->addHTML(Html::closeElement('fieldset'));
 				$out->addHTML(Html::openElement('fieldset'));
 				$out->addHTML(Html::rawElement('legend', [],
