@@ -46,7 +46,7 @@ class SpecialReport extends SpecialPage {
 		$dbr = wfGetDB( DB_REPLICA );
 		if ($dbr->selectRow( 'report_reports', [ 'report_id' ], [
 			'report_revid' => $rev->getId(),
-			'report_user' => $user->getId()
+			'report_actor' => $user->getId()
 		], __METHOD__ )) {
 			$out->addHTML(Html::rawElement( 'p', [],
 				wfMessage( 'report-already-reported' )->escaped()
@@ -112,8 +112,7 @@ class SpecialReport extends SpecialPage {
 			$dbw->insert( 'report_reports', [
 				'report_revid' => (int)$par,
 				'report_reason' => $request->getText('reason'),
-				'report_user' => $wgUser->getId(),
-				'report_user_text' => $wgUser->getName(),
+				'report_actor' => $wgUser->getId(),
 				'report_timestamp' => wfTimestampNow()
 			], __METHOD__ );
 			$dbw->endAtomic(__METHOD__);
