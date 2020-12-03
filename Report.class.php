@@ -19,7 +19,7 @@ class ReportHooks {
 		$dbr = wfGetDB( DB_REPLICA );
 		if ($dbr->selectRow( 'report_reports', [ 'report_id' ], [
 			'report_revid' => $id,
-			'report_user' => $wgUser->getId()
+			'report_actor' => $wgUser->getId()
 		], __METHOD__ )) {
 			return Html::element( 'span', [ 'class' => 'mw-report-reported' ],
 				wfMessage( 'report-reported' )->escaped()
