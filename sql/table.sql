@@ -10,9 +10,7 @@ CREATE TABLE IF NOT EXISTS /*_*/report_reports (
   -- Report reason
   report_reason varchar(255) binary NOT NULL DEFAULT '',
   -- Who reported it
-  report_user integer unsigned NOT NULL,
-  -- Username
-  report_user_text varchar(255) binary NOT NULL,
+  report_actor integer unsigned NOT NULL,
   -- Whether the report has been dealt with
   report_handled boolean NOT NULL DEFAULT 0,
   -- Who dealt with the report
@@ -24,13 +22,13 @@ CREATE TABLE IF NOT EXISTS /*_*/report_reports (
 ) /*$wgDBTableOptions*/;
 
 -- indexes
-CREATE INDEX /*i*/revid ON /*_*/report_reports (report_revid, report_id, report_user, report_timestamp);
-CREATE INDEX /*i*/user ON /*_*/report_reports (report_user, report_id, report_revid, report_timestamp);
-CREATE INDEX /*i*/age ON /*_*/report_reports (report_timestamp, report_id, report_user, report_revid);
+CREATE INDEX /*i*/revid ON /*_*/report_reports (report_revid, report_id, report_actor, report_timestamp);
+CREATE INDEX /*i*/user ON /*_*/report_reports (report_actor, report_id, report_revid, report_timestamp);
+CREATE INDEX /*i*/age ON /*_*/report_reports (report_timestamp, report_id, report_actor, report_revid);
 
 -- handling indexes
-CREATE INDEX /*i*/handled ON /*_*/report_reports (report_handled, report_revid, report_id, report_user, report_timestamp);
-CREATE INDEX /*i*/handler ON /*_*/report_reports (report_handled_by, report_revid, report_id, report_user, report_timestamp);
-CREATE INDEX /*i*/handled_at ON /*_*/report_reports (report_handled_timestamp, report_revid, report_id, report_user, report_timestamp);
+CREATE INDEX /*i*/handled ON /*_*/report_reports (report_handled, report_revid, report_id, report_actor, report_timestamp);
+CREATE INDEX /*i*/handler ON /*_*/report_reports (report_handled_by, report_revid, report_id, report_actor, report_timestamp);
+CREATE INDEX /*i*/handled_at ON /*_*/report_reports (report_handled_timestamp, report_revid, report_id, report_actor, report_timestamp);
 
 COMMIT;
