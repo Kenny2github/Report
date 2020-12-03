@@ -5,6 +5,9 @@ class ReportHooks {
 	function onLoadExtensionSchemaUpdates( $updater ) {
 		$updater->addExtensionTable( 'report_reports',
 			__DIR__ . '/sql/table.sql' );
+		$updater->modifyExtensionTable( 'report_reports',
+			__DIR__ . '/sql/patches/patch-report_actor.sql' );
+
 		return true;
 	}
 
