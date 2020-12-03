@@ -1,7 +1,8 @@
 {
 	"name": "Report",
 	"author": [
-		"Ken Hilton"
+		"Ken Hilton",
+		"Universal Omega"
 	],
 	"url": "https://www.mediawiki.org/wiki/Extension:Report",
 	"descriptionmsg": "report-desc",
