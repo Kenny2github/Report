@@ -2,7 +2,7 @@
 
 class ReportHooks {
 
-	function onLoadExtensionSchemaUpdates( $updater ) {
+	static function onLoadExtensionSchemaUpdates( $updater ) {
 		$updater->addExtensionTable( 'report_reports',
 			__DIR__ . '/sql/table.sql' );
 		return true;
