@@ -118,7 +118,7 @@ class SpecialReport extends SpecialPage {
 			], __METHOD__ );
 			$dbw->endAtomic(__METHOD__);
 			$out->addWikiMsg( 'report-success' );
-			$out->addWikiMsg( 'returnto', '[[' . Revision::newFromId( (int)$par )->getTitle()->getPrefixedText() . ']]' );
+			$out->addWikiMsg( 'returnto', '[[' . SpecialPage::getTitleFor('Diff', $par)->getPrefixedText() . ']]' );
 			return;
 		}
 	}
