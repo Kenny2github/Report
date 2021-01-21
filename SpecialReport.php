@@ -55,7 +55,7 @@ class SpecialReport extends SpecialPage {
 		}
 		$request = $this->getRequest();
 		if ($request->wasPosted()) {
-			return self::onPost( $par, $out, $request );
+			return self::onPost( $par, $out, $request, $user );
 		}
 		$out->setIndexPolicy( 'noindex' );
 		$out->addHTML(
@@ -90,6 +90,14 @@ class SpecialReport extends SpecialPage {
 		$out->addHTML(Html::rawElement(
 			'input',
 			[
+				'type' => 'hidden',
+				'name' => 'token',
+				'value' => $user->getEditToken()
+			]
+		));
+		$out->addHTML(Html::rawElement(
+			'input',
+			[
 				'type' => 'submit',
 				'id' => 'mw-report-form-submit',
 				'value' => wfMessage( 'report-submit' )
@@ -98,29 +106,31 @@ class SpecialReport extends SpecialPage {
 		$out->addHTML(Html::closeElement( 'form' ));
 	}
 
-	static public function onPost( $par, $out, $request ) {
-		global $wgUser;
+	static public function onPost( $par, $out, $request, $user ) {
+		if (!$user->matchEditToken($request->getText( 'token' ))) {
+			$out->addWikiMsg( 'sessionfailure' );
+			return;
+		}
 		if (!$request->getText('reason')) {
 			$out->addHTML(Html::rawElement(
 				'p',
 				[ 'class' => 'error '],
 				wfMessage( 'report-error-missing-reason' )->escaped()
 			));
-		} else {
-			$dbw = wfGetDB( DB_MASTER );
-			$dbw->startAtomic(__METHOD__);
-			$dbw->insert( 'report_reports', [
-				'report_revid' => (int)$par,
-				'report_reason' => $request->getText('reason'),
-				'report_user' => $wgUser->getId(),
-				'report_user_text' => $wgUser->getName(),
-				'report_timestamp' => wfTimestampNow()
-			], __METHOD__ );
-			$dbw->endAtomic(__METHOD__);
-			$out->addWikiMsg( 'report-success' );
-			$out->addWikiMsg( 'returnto', '[[' . SpecialPage::getTitleFor('Diff', $par)->getPrefixedText() . ']]' );
 			return;
 		}
+		$dbw = wfGetDB( DB_MASTER );
+		$dbw->startAtomic(__METHOD__);
+		$dbw->insert( 'report_reports', [
+			'report_revid' => (int)$par,
+			'report_reason' => $request->getText('reason'),
+			'report_user' => $user->getId(),
+			'report_user_text' => $user->getName(),
+			'report_timestamp' => wfTimestampNow()
+		], __METHOD__ );
+		$dbw->endAtomic(__METHOD__);
+		$out->addWikiMsg( 'report-success' );
+		$out->addWikiMsg( 'returnto', '[[' . SpecialPage::getTitleFor('Diff', $par)->getPrefixedText() . ']]' );
 	}
 
 	public function getGroupName() {
