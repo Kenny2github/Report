@@ -31,6 +31,7 @@
 	"report-handling-view-nothandled": "View unhandled reports",
 	"report-handling-handled": "Handled",
 	"report-handling-nothandled": "Not handled",
+	"report-handling-no-reports": "There are no reports.",
 	"report-report": "report",
 	"report-reported": "reported",
 	"report-already-reported": "You have already reported this revision.",
