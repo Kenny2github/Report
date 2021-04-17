@@ -1,4 +1,62 @@
 <?php
+class HandleReportsPager extends ReverseChronologicalPager {
+	private $conds;
+	
+	function __construct($conds) {
+		$this->conds = $conds;
+		
+		parent::__construct();
+	}
+	
+	function getQueryInfo() {
+		 return [
+			'tables' => 'report_reports',
+			'fields' => [
+				'report_id',
+				'report_reason',
+				'report_user',
+				'report_revid',
+				'report_timestamp'
+			],
+			'conds' => $this->conds
+		];
+	}
+	
+	function getIndexField() {
+		return 'report_timestamp';
+	}
+	
+	function formatRow($row) {
+		global $wgScriptPath;
+		
+		$out = Html::openElement('tr');
+		$out .= Html::rawElement('td', [],
+			wfTimestamp( TS_ISO_8601, $row->report_timestamp )
+		);
+		$out .= Html::rawElement('td', [], Html::rawElement(
+			'textarea',
+			[ 'readonly' => '',
+			'class' => 'mw-report-handling-textarea' ],
+			htmlspecialchars($row->report_reason)
+		));
+		$user = User::newFromId($row->report_user);
+		$out .= Html::rawElement('td', [], Html::rawElement('a',
+			[ 'href' => $user->getUserPage()->getLocalURL() ],
+			htmlspecialchars($user->getName())
+		));
+		$out .= Html::rawElement('td', [], Html::rawElement('a',
+			[ 'href' => $wgScriptPath . '/index.php?diff=' . $row->report_revid ],
+			htmlspecialchars($row->report_revid)
+		));
+		$out .= Html::rawElement('td', [], Html::rawElement('a',
+			[ 'href' => SpecialPage::getTitleFor( 'HandleReports', $row->report_id )->getLocalURL() ],
+			wfMessage( 'report-handling-view-report' )->escaped()
+		));
+		$out .= Html::closeElement('tr');
+		
+		return $out;
+	}
+}
 
 class SpecialHandleReports extends SpecialPage {
 
@@ -20,6 +78,7 @@ class SpecialHandleReports extends SpecialPage {
 		}
 		$dbr = wfGetDB( DB_REPLICA );
 		if (!ctype_digit( $par )) {
+			$out->addHtml(Html::openElement('p'));
 			if ( strtolower( $par ) !== strtolower( wfMessage( 'report-handled' )->text() ) ) {
 				$out->addHTML(Html::rawElement('a',
 					[ 'href' => SpecialPage::getTitleFor( 'HandleReports', wfMessage('report-handled')->text() )->getLocalURL() ],
@@ -31,70 +90,52 @@ class SpecialHandleReports extends SpecialPage {
 					wfMessage( 'report-handling-view-nothandled' )->escaped()
 				));
 			}
-			$out->addHTML(Html::openElement(
-				'table',
-				[ 'class' => 'mw-report-handling-list', 'width' => '100%' ]
-			));
-			$out->addHTML(Html::openElement('tr'));
-			$out->addHTML(Html::rawElement(
-				'th', [],
-				wfMessage( 'report-handling-th-timestamp' )->escaped()
-			));
-			$out->addHTML(Html::rawElement(
-				'th', [],
-				wfMessage( 'report-handling-th-reason' )->escaped()
-			));
-			$out->addHTML(Html::rawElement(
-				'th', [],
-				wfMessage( 'report-handling-th-user' )->escaped()
-			));
-			$out->addHTML(Html::rawElement(
-				'th', [],
-				wfMessage( 'report-handling-th-revid' )->escaped()
-			));
-			$out->addHTML(Html::rawElement('th', [],
-				wfMessage( 'report-handling-view-report' )->escaped()
-			));
-			$out->addHTML(Html::closeElement('tr'));
+			$out->addHtml(Html::closeElement('p'));
+			
 			if ( strtolower( $par ) === strtolower( wfMessage( 'report-handled' )->text() ) ) {
 				$conds = [ 'report_handled' => 1 ];
 			} else {
 				$conds = [ 'report_handled != 1' ];
 			}
-			foreach ($dbr->select( 'report_reports', [
-				'report_id',
-				'report_reason',
-				'report_user',
-				'report_revid',
-				'report_timestamp',
-			], $conds, __METHOD__)
-			as $row) {
-				$out->addHTML(Html::openElement('tr'));
-				$out->addHTML(Html::rawElement('td', [],
-					wfTimestamp( TS_ISO_8601, $row->report_timestamp )
+			$pager = new HandleReportsPager($conds);
+			
+			if ($pager->getNumRows() > 0) {
+				$out->addHtml(Html::rawElement('div', [], $pager->getNavigationBar()));
+				
+				$out->addHTML(Html::openElement(
+					'table',
+					[ 'class' => 'mw-report-handling-list', 'width' => '100%' ]
 				));
-				$out->addHTML(Html::rawElement('td', [], Html::rawElement(
-					'textarea',
-					[ 'readonly' => '',
-					'class' => 'mw-report-handling-textarea' ],
-					htmlspecialchars($row->report_reason)
-				)));
-				$user = User::newFromId($row->report_user);
-				$out->addHTML(Html::rawElement('td', [], Html::rawElement('a',
-					[ 'href' => $user->getUserPage()->getLocalURL() ],
-					htmlspecialchars($user->getName())
-				)));
-				$out->addHTML(Html::rawElement('td', [], Html::rawElement('a',
-					[ 'href' => $wgScriptPath . '/index.php?diff=' . $row->report_revid ],
-					htmlspecialchars($row->report_revid)
-				)));
-				$out->addHTML(Html::rawElement('td', [], Html::rawElement('a',
-					[ 'href' => SpecialPage::getTitleFor( 'HandleReports', $row->report_id )->getLocalURL() ],
+				$out->addHTML(Html::openElement('tr'));
+				$out->addHTML(Html::rawElement(
+					'th', [],
+					wfMessage( 'report-handling-th-timestamp' )->escaped()
+				));
+				$out->addHTML(Html::rawElement(
+					'th', [],
+					wfMessage( 'report-handling-th-reason' )->escaped()
+				));
+				$out->addHTML(Html::rawElement(
+					'th', [],
+					wfMessage( 'report-handling-th-user' )->escaped()
+				));
+				$out->addHTML(Html::rawElement(
+					'th', [],
+					wfMessage( 'report-handling-th-revid' )->escaped()
+				));
+				$out->addHTML(Html::rawElement('th', [],
 					wfMessage( 'report-handling-view-report' )->escaped()
-				)));
+				));
 				$out->addHTML(Html::closeElement('tr'));
+				
+				$out->addHTML($pager->getBody());
+				
+				$out->addHTML(Html::closeElement('table'));
+				
+				$out->addHtml(Html::rawElement('div', [], $pager->getNavigationBar()));
+			} else {
+				$out->addHTML(Html::rawElement('p', [], wfMessage('report-handling-no-reports')->escaped()));
 			}
-			$out->addHTML(Html::closeElement('table'));
 		} else {
 			if ($this->getRequest()->wasPosted()) {
 				return $this->onPost( $par, $out, $user );
