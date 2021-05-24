@@ -48,6 +48,9 @@
 			"i18n"
 		]
 	},
+	"ExtensionMessagesFiles": {
+		"ReportAlias": "Report.i18n.alias.php"
+	},
 	"manifest_version": 2,
 	"requires": {
 		"MediaWiki": ">= 1.31.0",
