@@ -24,18 +24,20 @@
 	"report-handling-view-report": "Link text to view the report",
 	"report-handling": "Fieldset legend for handling a report",
 	"report-handling-mark-handled": "Button text to mark a report as handled",
-	"report-handling-nothandled": "Text for report being not handled",
 	"report-handling-handledq": "Table header for whether the report is handled",
 	"report-handling-handled-by": "Table header for username of handler",
 	"report-handling-view-handled": "Link text to view handled reports",
 	"report-handling-view-nothandled": "Link text to view unhandled reports",
 	"report-handling-handled": "Text specifying that the report being viewed is handled",
 	"report-handling-nothandled": "Text specifying that the report being viewed is not handled",
+	"report-handling-no-reports": "Message indicating no reports to be viewed",
 	"report-report": "Link text for report link in history and diffs",
 	"report-reported": "Span text for a revision that has already been reported by the user",
 	"report-already-reported": "Error text for when a user attempts to re-report a revision",
 	"report-reports-awaiting": "Contents of at the top of Special:RecentChanges and Special:Watchlist notifying admins that there are reports needing handling. $1 is the link to the special page, $2 is the number of reports.",
 	"report-reports-awaiting-linktext": "Link text for the admin's box link leading to Special:HandleReports. $1 is the number of reports.",
 	"report-has-been-handled": "Contents of paragraph stating handling success",
-	"report-submit": "Button text for submitting a report"
+	"report-submit": "Button text for submitting a report",
+	"right-report": "Description of revision reporting user right",
+	"right-handle-reports": "Description of revision report handling user right"
 }

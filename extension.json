@@ -7,24 +7,22 @@
 	"descriptionmsg": "report-desc",
 	"license-name": "GPLv3",
 	"type": "specialpage",
-	"AutoloadClasses": {
-		"ReportHooks": "Report.class.php",
-		"SpecialReport": "SpecialReport.php",
-		"SpecialHandleReports": "SpecialHandleReports.php"
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\Report\\": "includes/"
 	},
 	"AvailableRights": [
 		"report",
 		"handle-reports"
 	],
 	"SpecialPages": {
-		"Report": "SpecialReport",
-		"HandleReports": "SpecialHandleReports"
+		"Report": "MediaWiki\\Extension\\Report\\SpecialReport",
+		"HandleReports": "MediaWiki\\Extension\\Report\\SpecialHandleReports"
 	},
 	"Hooks": {
-		"LoadExtensionSchemaUpdates": "ReportHooks::onLoadExtensionSchemaUpdates",
-		"HistoryRevisionTools": "ReportHooks::insertReportLink",
-		"DiffRevisionTools": "ReportHooks::insertReportLink",
-		"BeforePageDisplay": "ReportHooks::reportsAwaitingNotice"
+		"LoadExtensionSchemaUpdates": "MediaWiki\\Extension\\Report\\ReportHooks::onLoadExtensionSchemaUpdates",
+		"HistoryRevisionTools": "MediaWiki\\Extension\\Report\\ReportHooks::insertReportLink",
+		"DiffRevisionTools": "MediaWiki\\Extension\\Report\\ReportHooks::insertReportLink",
+		"BeforePageDisplay": "MediaWiki\\Extension\\Report\\ReportHooks::reportsAwaitingNotice"
 	},
 	"GroupPermissions": {
 		"user": {
@@ -50,5 +48,11 @@
 			"i18n"
 		]
 	},
-	"manifest_version": 1
+	"manifest_version": 2,
+	"requires": {
+		"MediaWiki": ">= 1.31.0",
+		"platform": {
+			"php": ">= 5.6"
+		}
+	}
 }

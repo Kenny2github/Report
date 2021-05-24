@@ -1,8 +1,9 @@
-textarea {
+textarea.mw-report-handling-textarea {
 	resize: vertical;
 	display: block;
 }
-table {
+table.mw-report-handling-list,
+table.mw-report-handling-view {
 	text-align: center;
 }
 #mw-report-reports-awaiting {
@@ -10,4 +11,5 @@ table {
 	margin: 5px;
 	border: 1px solid #990000;
 	background-color: #f9f9f9;
+	color: black;
 }
