@@ -36,8 +36,8 @@
 	"report-already-reported": "この版はすでに報告されています",
 	"report-reports-awaiting": "<b>$2</b>個の$1が確認待ちです。<b>ご注意ください!</b>",
 	"report-reports-awaiting-linktext": "{{PLURAL:$1|報告}}",
-	"report-has-been-handled": "この報告は確認済みとされました。",
+	"report-has-been-handled": "この報告を確認済みとしました。",
 	"report-submit": "送信",
-	"right-report": "管理者の注意を引くために改訂を報告する",
-	"right-handle-reports": "改訂レポートを確認する"
+	"right-report": "管理者に変更を報告する",
+	"right-handle-reports": "変更の報告を確認する"
 }
