@@ -3,6 +3,7 @@ namespace MediaWiki\Extension\Report;
 
 use SpecialPage;
 use Html;
+use MediaWiki\MediaWikiServices;
 use User;
 
 class SpecialHandleReports extends SpecialPage {
@@ -83,6 +84,9 @@ class SpecialHandleReports extends SpecialPage {
 	}
 
 	public function showReport( $par, $out, $user ) {
+		
+		$userfactory = MediaWikiServices::getInstance()->getUserFactory();
+
 		if ($this->getRequest()->wasPosted()) {
 			return $this->onPost( $par, $out, $user );
 		}
@@ -124,7 +128,7 @@ class SpecialHandleReports extends SpecialPage {
 				[ 'readonly' => '', 'class' => 'mw-report-handling-textarea' ],
 				$query->report_reason
 			));
-			$user = User::newFromId($query->report_user);
+			$user = $userfactory->newFromId($query->report_user);
 			$out->addHTML(Html::closeElement('fieldset'));
 
 			// Report information display
@@ -217,7 +221,7 @@ class SpecialHandleReports extends SpecialPage {
 			// Handler
 			$out->addHTML(Html::openElement('td'));
 			if ($query->report_handled) {
-				$handledby = User::newFromId($query->report_handled_by);
+				$handledby = $userfactory->newFromId($query->report_handled_by);
 				$out->addHTML(Html::element(
 					'a',
 					[
