@@ -3,7 +3,7 @@ namespace MediaWiki\Extension\Report;
 
 use SpecialPage;
 use Html;
-use Revision;
+use MediaWiki\MediaWikiServices;
 
 class SpecialReport extends SpecialPage {
 
@@ -33,7 +33,7 @@ class SpecialReport extends SpecialPage {
 			$this->showError( 'report-error-invalid-revid', $par );
 			return;
 		}
-		$rev = Revision::newFromId( (int)$par );
+		$rev = MediaWikiServices::getInstance()->getRevisionLookup()->getRevisionById( (int)$par );
 		if (!$rev) {
 			$this->showError( 'report-error-invalid-revid', $par );
 			return;

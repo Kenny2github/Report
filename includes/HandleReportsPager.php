@@ -4,7 +4,7 @@ namespace MediaWiki\Extension\Report;
 use ReverseChronologicalPager;
 use Html;
 use SpecialPage;
-use User;
+use MediaWiki\MediaWikiServices;
 
 class HandleReportsPager extends ReverseChronologicalPager {
 	private $conds;
@@ -47,7 +47,7 @@ class HandleReportsPager extends ReverseChronologicalPager {
 			],
 			$row->report_reason
 		));
-		$user = User::newFromId($row->report_user);
+		$user = MediaWikiServices::getInstance()->getUserFactory()->newFromId($row->report_user);
 		$out .= Html::rawElement('td', [], Html::element(
 			'a',
 			[
