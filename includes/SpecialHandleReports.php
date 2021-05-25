@@ -4,7 +4,6 @@ namespace MediaWiki\Extension\Report;
 use SpecialPage;
 use Html;
 use MediaWiki\MediaWikiServices;
-use User;
 
 class SpecialHandleReports extends SpecialPage {
 
