@@ -4,7 +4,6 @@ namespace MediaWiki\Extension\Report;
 use ReverseChronologicalPager;
 use Html;
 use SpecialPage;
-use User;
 use MediaWiki\MediaWikiServices;
 
 class HandleReportsPager extends ReverseChronologicalPager {
