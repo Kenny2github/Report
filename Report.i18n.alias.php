@@ -23,3 +23,11 @@ $specialPageAliases['ja'] = [
 	'Report' => [ '報告' ],
 	'HandleReports' => [ '報告された版の確認' ]
 ];
+
+/** Japanese
+ * @author ahmetlii
+ */
+$specialPageAliases['tr'] = [
+	'Report' => [ 'Bildirim' ],
+	'HandleReports' => [ 'BildirimleriKontrolEt', 'Bildirimleri Kontrol Et']
+];
